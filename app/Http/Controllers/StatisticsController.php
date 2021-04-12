@@ -17,13 +17,13 @@ class StatisticsController extends BaseController
 
     /**
      * @OA\Post(
-     *      path="api/statistics",
+     *      path="/api/statistics",
      *      operationId="store",
      *      tags={"Statistics"},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             @OA\Property(property="link", type="string", example="google.com"),
+     *             @OA\Property(property="link", type="string", example="https://www.google.com/"),
      *             @OA\Property(property="link_type", type="string", example="homepage"),
      *             @OA\Property(property="customer_uuid", type="string", format="uuid", example="09bfb8dc-fdc9-3bc0-a417-2eaf1f293c13"),
      *         )

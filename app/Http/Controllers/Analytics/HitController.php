@@ -105,6 +105,7 @@ class HitController extends BaseController
      *    description="Successful operation",
      *    @OA\JsonContent(ref="#/components/schemas/Statistics")
      * )
+     * )
      */
     public function getHitsByLinkType($linkType, Request $request): JsonResponse
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreStatisticsRequest extends FormRequest
 {
@@ -24,9 +25,12 @@ class StoreStatisticsRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => 'required',
-            'link_type' => 'required',
-            'customer_uuid' => 'required'
+            'link' => 'required|URL',
+            'link_type' => [
+                'required',
+                Rule::in(['product', 'category', 'static-page', 'checkout', 'homepage'])
+            ],
+            'customer_uuid' => 'required|uuid'
         ];
     }
 

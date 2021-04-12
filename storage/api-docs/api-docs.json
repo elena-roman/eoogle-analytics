@@ -91,18 +91,12 @@
                     }
                 ],
                 "responses": {
-                    "422": {
-                        "description": "Wrong credentials response",
+                    "200": {
+                        "description": "Successful operation",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Statistics"
                                 }
                             }
                         }
@@ -130,17 +124,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Wrong credentials response",
+                        "description": "Successful operation",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Statistics"
                                 }
                             }
                         }
@@ -168,25 +156,12 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Wrong credentials response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Successful operation"
                     }
                 }
             }
         },
-        "api/statistics": {
+        "/api/statistics": {
             "post": {
                 "tags": [
                     "Statistics"
@@ -200,7 +175,7 @@
                                 "properties": {
                                     "link": {
                                         "type": "string",
-                                        "example": "google.com"
+                                        "example": "https://www.google.com/"
                                     },
                                     "link_type": {
                                         "type": "string",

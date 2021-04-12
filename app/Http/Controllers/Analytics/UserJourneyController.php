@@ -36,6 +36,7 @@ class UserJourneyController extends BaseController
      *    description="Successful operation",
      *    @OA\JsonContent(ref="#/components/schemas/Statistics")
      * )
+     * )
      */
     public function getUserJourney($userIdentifier): JsonResponse
     {
@@ -61,6 +62,7 @@ class UserJourneyController extends BaseController
      * @OA\Response(
      *    response=200,
      *    description="Successful operation",
+     * )
      * )
      */
     public function getUsersByUserJourney($userIdentifier): JsonResponse

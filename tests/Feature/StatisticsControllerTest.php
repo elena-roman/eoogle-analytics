@@ -28,11 +28,27 @@ class StatisticsControllerTest extends TestCase
         $this->trackService->shouldReceive('track')->once();
 
         $response = $this->postJson(self::$BASE_PATH, [
+            'link' => 'https://www.youtube.com/',
+            'link_type' => 'homepage',
+            'customer_uuid' => uniqid()
+        ]);
+
+        $response->assertStatus(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @test
+     */
+    public function testReturnStatus422WhenStoreWithInvalidData()
+    {
+        $this->trackService->shouldReceive('track')->never();
+
+        $response = $this->postJson(self::$BASE_PATH, [
             'link' => 'aLink',
             'link_type' => 'homepage',
             'customer_uuid' => 'aCustomerUuid'
         ]);
 
-        $response->assertStatus(Response::HTTP_CREATED);
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
