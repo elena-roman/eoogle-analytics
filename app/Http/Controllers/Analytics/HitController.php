@@ -40,7 +40,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date"
+     *         type="string", format="date", example="2040-04-04"
      *    )
      * ),
      * @OA\Parameter(
@@ -48,7 +48,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date"
+     *         type="string", format="date", example="2040-04-04"
      *    )
      * ),
      * @OA\Response(
@@ -72,7 +72,7 @@ class HitController extends BaseController
 
     /**
      * @OA\Get(
-     * path="/api/analytics/hits//by-type/{linkType}",
+     * path="/api/analytics/hits/by-type/{linkType}",
      * summary="getHitsByLinkInInterval",
      * operationId="getHitsByLinkInInterval",
      * tags={"hits"},
@@ -81,7 +81,12 @@ class HitController extends BaseController
      *     required=true,
      *     in="path",
      *     @OA\Schema(
-     *         type="string"
+     *          type="string",
+     *          default="homepage",
+     *          @OA\Items(
+     *              type="string",
+     *              enum = {"product", "category", "static-page", "checkout", "homepage"},
+     *          )
      *     )
      * ),
      * @OA\Parameter(
@@ -89,7 +94,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date"
+     *         type="string", format="date", example="2000-04-04"
      *    )
      * ),
      * @OA\Parameter(
@@ -97,7 +102,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date"
+     *         type="string", format="date", example="2040-04-04"
      *    )
      * ),
      * @OA\Response(
