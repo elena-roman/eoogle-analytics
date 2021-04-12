@@ -19,7 +19,7 @@ class UserJourneyController extends BaseController
 
     /**
      * @OA\Get(
-     * path="/user-journey/{customer_uuid}",
+     * path="/api/analytics/user-journey/{customer_uuid}",
      * summary="getUserJourney",
      * operationId="getUserJourney",
      * tags={"user-journey"},
@@ -28,19 +28,16 @@ class UserJourneyController extends BaseController
      *     required=true,
      *     in="path",
      *     @OA\Schema(
-     *         type="uuid"
+     *         type="string", format="uuid"
      *     )
      * ),
      * @OA\Response(
-     *    response=422,
-     *    description="Wrong credentials response",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *        )
-     *     )
+     *    response=200,
+     *    description="Successful operation",
+     *    @OA\JsonContent(ref="#/components/schemas/Statistics")
      * )
      */
-    public function getUserJourney(string $userIdentifier): JsonResponse
+    public function getUserJourney($userIdentifier): JsonResponse
     {
         return response()->json(
             jsend_success($this->userJourneyService->getUserJourney($userIdentifier))
@@ -49,7 +46,7 @@ class UserJourneyController extends BaseController
 
     /**
      * @OA\Get(
-     * path="/user-journey/{customer_uuid}/similar",
+     * path="/api/analytics/user-journey/{customer_uuid}/similar",
      * summary="getUsersJourneyByUserIdentifier",
      * operationId="getUsersJourneyByUserIdentifier",
      * tags={"user-journey"},
@@ -58,22 +55,18 @@ class UserJourneyController extends BaseController
      *     required=true,
      *     in="path",
      *     @OA\Schema(
-     *         type="uuid"
+     *         type="string", format="uuid"
      *     )
      * ),
      * @OA\Response(
-     *    response=422,
-     *    description="Wrong credentials response",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *        )
-     *     )
+     *    response=200,
+     *    description="Successful operation",
      * )
      */
-    public function getUsersJourneyByUserIdentifier($userIdentifier): JsonResponse
+    public function getUsersByUserJourney($userIdentifier): JsonResponse
     {
         return response()->json(
-            $this->userJourneyService->getUsersJourneyByUserIdentifier($userIdentifier)
+            $this->userJourneyService->getUsersByUserJourney($userIdentifier)
         );
     }
 }

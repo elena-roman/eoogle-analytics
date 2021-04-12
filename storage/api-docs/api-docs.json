@@ -5,13 +5,14 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/analytics/hits//by-link/{link}": {
+        "/api/analytics/hits/by-link/{link}": {
             "get": {
                 "tags": [
-                    "hits"
+                    "hits",
+                    "analytics"
                 ],
-                "summary": "getHitsByLinkInInterval",
-                "operationId": "getHitsByLinkInInterval",
+                "summary": "getHitsByLink",
+                "operationId": "getHitsByLink",
                 "parameters": [
                     {
                         "name": "link",
@@ -26,7 +27,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "date"
+                            "type": "string",
+                            "format": "date"
                         }
                     },
                     {
@@ -34,27 +36,18 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "date"
+                            "type": "string",
+                            "format": "date"
                         }
                     }
                 ],
-                "requestBody": {
-                    "description": "Pass user credentials",
-                    "required": true
-                },
                 "responses": {
-                    "422": {
-                        "description": "Wrong credentials response",
+                    "200": {
+                        "description": "Successful operation",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/Statistics"
                                 }
                             }
                         }
@@ -62,7 +55,7 @@
                 }
             }
         },
-        "/analytics/hits//by-type/{linkType}": {
+        "/api/analytics/hits//by-type/{linkType}": {
             "get": {
                 "tags": [
                     "hits"
@@ -84,7 +77,7 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date"
                         }
                     },
                     {
@@ -93,14 +86,10 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date"
                         }
                     }
                 ],
-                "requestBody": {
-                    "description": "Pass user credentials",
-                    "required": true
-                },
                 "responses": {
                     "422": {
                         "description": "Wrong credentials response",
@@ -121,7 +110,7 @@
                 }
             }
         },
-        "/user-journey/{customer_uuid}": {
+        "/api/analytics/user-journey/{customer_uuid}": {
             "get": {
                 "tags": [
                     "user-journey"
@@ -134,12 +123,13 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "uuid"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
                 "responses": {
-                    "422": {
+                    "200": {
                         "description": "Wrong credentials response",
                         "content": {
                             "application/json": {
@@ -158,7 +148,7 @@
                 }
             }
         },
-        "/user-journey/{customer_uuid}/similar": {
+        "/api/analytics/user-journey/{customer_uuid}/similar": {
             "get": {
                 "tags": [
                     "user-journey"
@@ -171,12 +161,13 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "uuid"
+                            "type": "string",
+                            "format": "uuid"
                         }
                     }
                 ],
                 "responses": {
-                    "422": {
+                    "200": {
                         "description": "Wrong credentials response",
                         "content": {
                             "application/json": {
@@ -195,19 +186,33 @@
                 }
             }
         },
-        "/statistics": {
+        "api/statistics": {
             "post": {
                 "tags": [
                     "Statistics"
                 ],
                 "operationId": "store",
                 "requestBody": {
-                    "description": "Pet object that needs to be added to the store",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreStatisticsRequest"
+                                "properties": {
+                                    "link": {
+                                        "type": "string",
+                                        "example": "google.com"
+                                    },
+                                    "link_type": {
+                                        "type": "string",
+                                        "example": "homepage"
+                                    },
+                                    "customer_uuid": {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "09bfb8dc-fdc9-3bc0-a417-2eaf1f293c13"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -225,36 +230,6 @@
     },
     "components": {
         "schemas": {
-            "StoreStatisticsRequest": {
-                "required": [
-                    "link",
-                    "link_type",
-                    "customer_uuid"
-                ],
-                "properties": {
-                    "link": {
-                        "type": "integer",
-                        "readOnly": "true",
-                        "example": "1"
-                    },
-                    "link_type": {
-                        "description": "User role",
-                        "type": "string",
-                        "readOnly": "true"
-                    },
-                    "customer_uuid": {
-                        "description": "User unique email address",
-                        "type": "string",
-                        "format": "email",
-                        "readOnly": "true",
-                        "example": "user@gmail.com"
-                    }
-                },
-                "type": "object",
-                "xml": {
-                    "name": "StoreStatisticsRequest"
-                }
-            },
             "Statistics": {
                 "title": "Statistics",
                 "properties": {

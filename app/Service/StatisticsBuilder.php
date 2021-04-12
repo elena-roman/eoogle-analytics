@@ -6,7 +6,7 @@ namespace App\Service;
 
 use App\Models\Statistics;
 
-class StatisticsBuilder implements Builder
+class StatisticsBuilder
 {
     private $statistics;
 

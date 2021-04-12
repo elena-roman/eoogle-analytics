@@ -4,10 +4,15 @@
 namespace App\Service;
 
 
+use App\Http\Requests\StoreStatisticsRequest;
+
 class TrackService
 {
-    public function track($request) {
-        $statistics  = (new StatisticsBuilder())->customerUuid('x')->link('a')->linkType('x')->build();
+    public function track(StoreStatisticsRequest $request) {
+        $statistics  = (new StatisticsBuilder())->link($request->getLink())
+            ->linkType($request->getLinkType())
+            ->customerUuid($request->getCustomerUuid())
+            ->build();
         $statistics->save();
     }
 }

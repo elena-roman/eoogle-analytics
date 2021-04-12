@@ -23,10 +23,10 @@ class HitController extends BaseController
 
     /**
      * @OA\Get(
-     * path="/analytics/hits//by-link/{link}",
-     * summary="getHitsByLinkInInterval",
-     * operationId="getHitsByLinkInInterval",
-     * tags={"hits"},
+     * path="/api/analytics/hits/by-link/{link}",
+     * summary="getHitsByLink",
+     * operationId="getHitsByLink",
+     * tags={"hits", "analytics"},
      * @OA\Parameter(
      *     name="link",
      *     required=true,
@@ -40,7 +40,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="date"
+     *         type="string", format="date"
      *    )
      * ),
      * @OA\Parameter(
@@ -48,21 +48,18 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="date"
+     *         type="string", format="date"
      *    )
      * ),
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Pass user credentials",
-     * ),
      * @OA\Response(
-     *    response=422,
-     *    description="Wrong credentials response",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *        )
-     *     )
+     *    response=200,
+     *    description="Successful operation",
+     *    @OA\JsonContent(ref="#/components/schemas/Statistics")
      * )
+     * )
+     * @param $link
+     * @param Request $request
+     * @return JsonResponse
      */
     public function getHitsByLink($link, Request $request): JsonResponse
     {
@@ -75,7 +72,7 @@ class HitController extends BaseController
 
     /**
      * @OA\Get(
-     * path="/analytics/hits//by-type/{linkType}",
+     * path="/api/analytics/hits//by-type/{linkType}",
      * summary="getHitsByLinkInInterval",
      * operationId="getHitsByLinkInInterval",
      * tags={"hits"},
@@ -92,7 +89,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date-time"
+     *         type="string", format="date"
      *    )
      * ),
      * @OA\Parameter(
@@ -100,27 +97,20 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date-time"
+     *         type="string", format="date"
      *    )
      * ),
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Pass user credentials",
-     * ),
      * @OA\Response(
-     *    response=422,
-     *    description="Wrong credentials response",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *        )
-     *     )
+     *    response=200,
+     *    description="Successful operation",
+     *    @OA\JsonContent(ref="#/components/schemas/Statistics")
      * )
      */
-    public function getHitsByPageType($pageType, Request $request): JsonResponse
+    public function getHitsByLinkType($linkType, Request $request): JsonResponse
     {
         return response()->json(
             jsend_success(
-                $this->hitsByPageTypeService->retrieve($request->get('start_date'), $request->get('end_date'), $pageType)
+                $this->hitsByPageTypeService->retrieve($request->get('start_date'), $request->get('end_date'), $linkType)
             )
         );
     }

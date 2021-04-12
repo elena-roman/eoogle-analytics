@@ -16,17 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('statistics', StatisticsController::class)
-    ->only(['store']);
+Route::post('statistics', [StatisticsController::class, 'store']);
 
 Route::prefix('analytics')->group(function () {
     Route::prefix('hits')->group(function () {
         Route::get('/by-link/{link}', [HitController::class, 'getHitsByLink']);
-        Route::get('/by-type/{linkType}', [HitController::class, 'getHitsByPageType']);
+        Route::get('/by-type/{linkType}', [HitController::class, 'getHitsByLinkType']);
     });
 
     Route::prefix('user-journey')->group(function () {
         Route::get('/{customer_uuid}', [UserJourneyController::class, 'getUserJourney']);
-        Route::get('/{customer_uuid}/similar', [UserJourneyController::class, 'getUsersJourneyByUserIdentifier']);
+        Route::get('/{customer_uuid}/similar', [UserJourneyController::class, 'getUsersByUserJourney']);
     });
 });
