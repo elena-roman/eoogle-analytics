@@ -8,8 +8,7 @@
         "/api/analytics/hits/by-link/{link}": {
             "get": {
                 "tags": [
-                    "hits",
-                    "analytics"
+                    "hits"
                 ],
                 "summary": "getHitsByLink",
                 "operationId": "getHitsByLink",
@@ -29,7 +28,7 @@
                         "schema": {
                             "type": "string",
                             "format": "date",
-                            "example": "2040-04-04"
+                            "example": "2020-04-04"
                         }
                     },
                     {

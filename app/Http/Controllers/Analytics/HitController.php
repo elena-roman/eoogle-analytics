@@ -40,7 +40,7 @@ class HitController extends BaseController
      *    in="query",
      *    required=true,
      *    @OA\Schema(
-     *         type="string", format="date", example="2040-04-04"
+     *         type="string", format="date", example="2020-04-04"
      *    )
      * ),
      * @OA\Parameter(

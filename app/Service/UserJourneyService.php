@@ -26,6 +26,7 @@ class UserJourneyService
 
         return DB::table("statistics")
             ->select('customer_uuid')
+            ->where('customer_uuid', '!=', $userIdentifier)
             ->groupBy('customer_uuid')
             ->havingRaw('GROUP_CONCAT(link) = ?', [$userJourney])
             // if we want all users that have the journey + extra pages before or after
