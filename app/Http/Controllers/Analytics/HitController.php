@@ -26,7 +26,7 @@ class HitController extends BaseController
      * path="/api/analytics/hits/by-link/{link}",
      * summary="getHitsByLink",
      * operationId="getHitsByLink",
-     * tags={"hits", "analytics"},
+     * tags={"hits"},
      * @OA\Parameter(
      *     name="link",
      *     required=true,
