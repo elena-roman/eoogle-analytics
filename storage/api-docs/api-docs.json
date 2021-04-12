@@ -1,0 +1,260 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Eoogle Analytics",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/analytics/hits//by-link/{link}": {
+            "post": {
+                "tags": [
+                    "hits"
+                ],
+                "summary": "getHitsByLinkInInterval",
+                "operationId": "getHitsByLinkInInterval",
+                "parameters": [
+                    {
+                        "name": "link",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "date"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "date"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/analytics/hits//by-type/{linkType}": {
+            "post": {
+                "tags": [
+                    "hits"
+                ],
+                "summary": "getHitsByLinkInInterval",
+                "operationId": "getHitsByLinkInInterval",
+                "parameters": [
+                    {
+                        "name": "linkType",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user-journey/{customer_uuid}": {
+            "post": {
+                "tags": [
+                    "user-journey"
+                ],
+                "summary": "getUserJourney",
+                "operationId": "getUserJourney",
+                "parameters": [
+                    {
+                        "name": "customer_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user-journey/{customer_uuid}/similar": {
+            "post": {
+                "tags": [
+                    "user-journey"
+                ],
+                "summary": "getUsersJourneyByUserIdentifier",
+                "operationId": "getUsersJourneyByUserIdentifier",
+                "parameters": [
+                    {
+                        "name": "customer_uuid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/statistics": {
+            "post": {
+                "tags": [
+                    "Statistics"
+                ],
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreStatisticsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreStatisticsRequest": {
+                "title": "Store Project request",
+                "description": "Store Project request body data",
+                "required": [
+                    "link",
+                    "link_type",
+                    "customer_uuid"
+                ],
+                "type": "object"
+            },
+            "Statistics": {
+                "title": "Statistics",
+                "properties": {
+                    "link": {
+                        "title": "link",
+                        "type": "string"
+                    },
+                    "link_type": {
+                        "title": "link_type",
+                        "type": "string"
+                    },
+                    "customer_uuid": {
+                        "title": "customer_uuid",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
