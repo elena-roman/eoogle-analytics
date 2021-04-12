@@ -6,7 +6,7 @@
     },
     "paths": {
         "/analytics/hits//by-link/{link}": {
-            "post": {
+            "get": {
                 "tags": [
                     "hits"
                 ],
@@ -63,7 +63,7 @@
             }
         },
         "/analytics/hits//by-type/{linkType}": {
-            "post": {
+            "get": {
                 "tags": [
                     "hits"
                 ],
@@ -122,7 +122,7 @@
             }
         },
         "/user-journey/{customer_uuid}": {
-            "post": {
+            "get": {
                 "tags": [
                     "user-journey"
                 ],
@@ -159,7 +159,7 @@
             }
         },
         "/user-journey/{customer_uuid}/similar": {
-            "post": {
+            "get": {
                 "tags": [
                     "user-journey"
                 ],
@@ -202,6 +202,7 @@
                 ],
                 "operationId": "store",
                 "requestBody": {
+                    "description": "Pet object that needs to be added to the store",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -225,14 +226,34 @@
     "components": {
         "schemas": {
             "StoreStatisticsRequest": {
-                "title": "Store Project request",
-                "description": "Store Project request body data",
                 "required": [
                     "link",
                     "link_type",
                     "customer_uuid"
                 ],
-                "type": "object"
+                "properties": {
+                    "link": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "link_type": {
+                        "description": "User role",
+                        "type": "string",
+                        "readOnly": "true"
+                    },
+                    "customer_uuid": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "readOnly": "true",
+                        "example": "user@gmail.com"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "StoreStatisticsRequest"
+                }
             },
             "Statistics": {
                 "title": "Statistics",

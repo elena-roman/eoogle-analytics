@@ -18,7 +18,7 @@ class UserJourneyController extends BaseController
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      * path="/user-journey/{customer_uuid}",
      * summary="getUserJourney",
      * operationId="getUserJourney",
@@ -48,7 +48,7 @@ class UserJourneyController extends BaseController
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      * path="/user-journey/{customer_uuid}/similar",
      * summary="getUsersJourneyByUserIdentifier",
      * operationId="getUsersJourneyByUserIdentifier",

@@ -22,7 +22,7 @@ class HitController extends BaseController
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      * path="/analytics/hits//by-link/{link}",
      * summary="getHitsByLinkInInterval",
      * operationId="getHitsByLinkInInterval",
@@ -74,7 +74,7 @@ class HitController extends BaseController
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      * path="/analytics/hits//by-type/{linkType}",
      * summary="getHitsByLinkInInterval",
      * operationId="getHitsByLinkInInterval",

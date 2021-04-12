@@ -21,10 +21,11 @@ class StatisticsController extends BaseController
      *      path="/statistics",
      *      operationId="store",
      *      tags={"Statistics"},
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/StoreStatisticsRequest")
-     *      ),
+     *     @OA\RequestBody(
+     *         description="Pet object that needs to be added to the store",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StoreStatisticsRequest"),
+     *     ),
      *      @OA\Response(
      *          response=201,
      *          description="Successful operation"
